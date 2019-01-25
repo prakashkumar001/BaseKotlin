@@ -1,9 +1,10 @@
-package com.kotlin.example
+package com.kotlin.example.activities
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.kotlin.example.BaseActivity
+import com.kotlin.example.R
 
 class MainActivity : BaseActivity(){
 
@@ -15,7 +16,7 @@ class MainActivity : BaseActivity(){
     fun callActivity(view: View)
     {
         showToast("you click second Activity");
-        val intent= Intent(this,SecondActivity::class.java)
+        val intent= Intent(this, ApiCallActivity::class.java)
         startActivity(intent);
     }
 

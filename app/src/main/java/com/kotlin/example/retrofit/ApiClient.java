@@ -1,4 +1,4 @@
-package com.kotlin.example.api;
+package com.kotlin.example.retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
