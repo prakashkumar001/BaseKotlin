@@ -12,7 +12,7 @@ import org.json.JSONObject
 
  class VolleyRequestResponse  {
     val TAG = VolleyRequestResponse::class.java.simpleName
-    val basePath = "http://0dy0e.mocklab.io/"
+    val basePath = ""
 
      fun post(path: String,request:String, param: JSONObject,listener : Listener) {
 

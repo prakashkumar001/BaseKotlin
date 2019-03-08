@@ -7,7 +7,10 @@ import com.google.gson.JsonObject
 import com.kotlin.example.retrofit.ApiClient
 import com.kotlin.example.retrofit.ApiInterface
 import com.kotlin.example.callback.Listener
+import com.kotlin.example.retrofit.Api
+import com.kotlin.example.retrofit.ApiClients
 import com.kotlin.example.volley.VolleyRequestResponse
+import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,28 +27,29 @@ open class BaseActivity : AppCompatActivity() {
 
     fun callRetrofitApi(url: String, method: String, request: JsonObject, listener: Listener) {
 
-        val apiService: ApiInterface = ApiClient.create();
+        val apiClients=ApiClients();
+        val apiService: Api = apiClients.create();
 
         if (method.equals("GET", true)) {
-            apiService.callGetMethod(url).enqueue(object : Callback<Any> {
-                override fun onFailure(call: Call<Any>, t: Throwable) {
+            apiService.callGetMethod(url).enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     listener.onFailure(0, t.message.toString());
                 }
 
-                override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                    listener.onSucess(response.code(), response.body().toString());
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    listener.onSucess(response.code(), response.body()!!.string());
 
 
                 }
 
             })
         } else {
-            apiService.callPostMethod(url, request).enqueue(object : Callback<Any> {
-                override fun onFailure(call: Call<Any>, t: Throwable) {
+            apiService.callPostMethod(url, request).enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     listener.onFailure(0, t.message.toString());
                 }
 
-                override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     listener.onSucess(response.code(), response.body().toString());
 
 

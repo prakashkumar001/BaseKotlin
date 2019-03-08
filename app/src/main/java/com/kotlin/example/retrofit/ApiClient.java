@@ -9,13 +9,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
      */
    public class ApiClient {
 
-        public static ApiInterface create() {
+        public static Api create() {
             Retrofit retrofit = new Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl("http://0dy0e.mocklab.io/")
                     .build();
 
-            return retrofit.create(ApiInterface.class);
+            return retrofit.create(Api.class);
         }
     }
